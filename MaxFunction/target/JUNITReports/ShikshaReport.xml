@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="41.085" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="To test the functionality of max()Function in Python" name="To test the functinality of rating feedback form for valid credentials" time="40.673">
+<system-out><![CDATA[
+Given user is on max()Function page.........................................passed
+When user scrolls...........................................................passed
+And user clicks the rating option...........................................passed
+And user is redirected to feedback form.....................................passed
+And user selects one of the available options...............................passed
+And user enters Suggestions.................................................passed
+And user clicks the submit button...........................................passed
+Then user submits the feedback form successfully............................passed
+]]></system-out>
+</testcase>
+</testsuite>

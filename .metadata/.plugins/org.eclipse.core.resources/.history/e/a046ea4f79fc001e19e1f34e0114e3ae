@@ -1,0 +1,203 @@
+package shikshaStep;
+
+import java.awt.AWTException;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import shikshaDriver.DriverSetup;
+import shikshaPage.MaxFunctionPage;
+
+public class Stepdefinition {
+	static WebDriver driver;
+	MaxFunctionPage mf;
+	
+	@Given("user is on Shiksha home page")
+	public void user_is_on_shiksha_home_page() throws InterruptedException, AWTException {
+		driver = DriverSetup.chromedriver();
+	    mf = new MaxFunctionPage(driver);
+	    mf.background();
+	}
+
+	@When("user selects the shiksha online drop down")
+	public void user_selects_the_shiksha_online_drop_down() throws InterruptedException {
+
+		mf.shikshaOnline();
+		
+	}
+
+	@And("user selects on max\\()Function in Python")
+	public void user_selects_on_max_function_in_python() {
+		mf.maxFunction();
+	
+	}
+	@And("user scrolls to download pdf")
+	public void user_scrolls_to_download_pdf() {
+		 mf.scroll2();
+	}
+	@And("clicks on download as pdf")
+	public void clicks_on_download_as_pdf() {
+	    mf.pdf();
+	}
+	@Then("user downloads pdf successfully")
+	public void user_downloads_pdf_successfully() {
+	    
+	}
+	@AfterStep
+
+	public static void takeScreendown(Scenario scenerio) {
+
+		TakesScreenshot ts= (TakesScreenshot) driver;
+
+		   final byte[] src = ts.getScreenshotAs(OutputType.BYTES);
+
+	   scenerio.attach(src, "image/png",scenerio.getName());
+
+	
+}
+	
+//======================Scenario2======================================================================================================
+	
+	@Given("user is in max\\()Function page")
+	public void user_is_in_max_function_page() throws InterruptedException, AWTException {
+		
+	    driver = DriverSetup.chromedriver();
+	    mf = new MaxFunctionPage(driver);
+	    mf.background(); 
+	    mf.shikshaOnline();
+	    mf.maxFunction();
+	    
+	}
+
+	@When("user clicks the rating option")
+	public void user_clicks_the_rating_option() throws InterruptedException {
+	    
+		mf.scroll();
+	    mf.maxFunctionRating();
+	}
+
+	@Then("user is redirected to the feedback page successfully")
+	public void user_is_redirected_to_the_feedback_page_successfully() throws InterruptedException {
+		Thread.sleep(2000);
+		String feed2 = mf.f1();
+		Assert.assertTrue(feed2.contains("Feedback"));
+	}
+	
+//=======================Scenario3==========================================================================================================	
+	
+	@Given("user is in the Max\\()Function feedback form")
+	public void user_is_in_the_max_function_feedback_form() throws InterruptedException, AWTException {
+	    
+	    driver = DriverSetup.chromedriver();
+        mf = new MaxFunctionPage(driver);
+        mf.background();
+        mf.shikshaOnline();
+	    mf.maxFunction();
+	    mf.scroll();
+	    mf.maxFunctionRating();  
+	    
+	}
+	@When("user selects one of the available options")
+	public void user_selects_one_of_the_available_options() throws InterruptedException {
+	    
+	    mf.buttonRating();
+	
+	}
+//	@When("user enters {string}")
+//	public void user_enters(String suggestions) throws InterruptedException {
+//	    // Write code here that turns the phrase above into concrete actions
+//		mf.textarea(suggestions);
+//	}
+	@And("user enters Suggestions")
+	public void user_enters_suggestions(DataTable dt) throws InterruptedException {
+		
+		List<List<String>> cells=dt.cells();
+		mf.textarea(cells.get(0).get(0));
+		
+	}
+	@Then("user clicks the submit button")
+	public void user_clicks_the_submit_button() throws InterruptedException {
+	    
+		mf.clkbtn();
+		Thread.sleep(2000);
+		String feed3 = mf.fd();
+		Assert.assertTrue(feed3.contains("Feedback Received"));
+	}
+	
+//====================Scenario4=============================================================================================================
+	
+	@Given("user is in the Max\\()Function in Python page")
+	public void user_is_in_the_max_function_in_python_page() throws InterruptedException, AWTException {
+     mf = new MaxFunctionPage(driver);
+     mf.background();
+     mf.shikshaOnline();
+	 mf.maxFunction();
+	 mf.scroll1(); 
+	}
+//	@When("user enters the comments")
+//	public void user_enters_the_comments(DataTable dt) throws InterruptedException{
+//		 List<List<String>> cells=dt.cells();
+//	     mf.txt(cells.get(0).get(0));
+
+	 // mf.f3();
+    // Assert.assertEquals("https://www.shiksha.com/online-courses/articles/max-function-in-python/",driver.getCurrentUrl());
+	
+	    @When("user scrolls")
+	    public void user_scrolls() {
+	        mf.scroll1();
+	    }
+	    @And("enters comments")
+	    public void enters_comments(DataTable dt) throws InterruptedException {
+	        
+	    	 List<List<String>> cells=dt.cells();
+	         mf.txt(cells.get(0).get(0));
+	    }
+	    @Then("user clicks the Post button and is able to post the comment")
+		public void user_clicks_the_post_button_and_is_able_to_post_the_comment() throws InterruptedException {
+		    mf.postbtn();
+	    }
+//==================Scenario5================================================================================================================
+	
+	@Given("user is in the Shiksha Home page,")
+	public void user_is_in_the_shiksha_home_page() throws InterruptedException, AWTException {
+		mf = new MaxFunctionPage(driver);
+	    mf.background();
+	    
+	   
+	}
+	@When("user clicks on Ask a query on option")
+	public void user_clicks_on_ask_a_query_on_option() {
+	    
+	    
+	}
+	@Then("user is not redirected to the query  page successfully")
+	public void user_is_not_redirected_to_the_query_page_successfully() {
+	    
+	}
+
+//	@AfterStep
+//
+//	public static void takeScreendown(Scenario scenerio) {
+//
+//		TakesScreenshot ts= (TakesScreenshot) driver;
+//
+//		   final byte[] src = ts.getScreenshotAs(OutputType.BYTES);
+//
+//	   scenerio.attach(src, "image/png",scenerio.getName());
+//
+//	
+//}
+}

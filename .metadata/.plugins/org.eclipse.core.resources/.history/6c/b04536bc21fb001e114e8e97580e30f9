@@ -1,0 +1,147 @@
+package shikshaStep;
+
+import java.awt.AWTException;
+import java.util.List;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import shikshaDriver.DriverSetup;
+import shikshaPage.MaxFunctionPage;
+
+public class Stepdefinition {
+	static WebDriver driver;
+	MaxFunctionPage mf;
+	
+	@Given("user is in Shiksha home page")
+	public void user_is_in_shiksha_home_page() throws InterruptedException, AWTException {
+		driver = DriverSetup.chromedriver();
+	    mf = new MaxFunctionPage(driver);
+	    mf.background();
+	}
+
+	@When("user selects the shiksha online drop down")
+	public void user_selects_the_shiksha_online_drop_down() throws InterruptedException {
+
+		mf.shikshaOnline();
+	}
+
+	@And("user selects on max\\()Function in Python")
+	public void user_selects_on_max_function_in_python() {
+	    // Write code here that turns the phrase above into concrete actions
+	
+		mf.maxFunction();
+	}
+
+	@Then("user enters the max\\()Function page successfully")
+	public void user_enters_the_max_function_page_successfully() {
+	    // Write code here that turns the phrase above into concrete actions
+		Assert.assertEquals("https://www.shiksha.com/online-courses/articles/max-function-in-python/", driver.getCurrentUrl());	}
+	
+//======================Scenario2======================================================================================================
+	
+	@Given("user is in max\\()Function page")
+	public void user_is_in_max_function_page() throws InterruptedException, AWTException {
+	    // Write code here that turns the phrase above into concrete actions
+		driver = DriverSetup.chromedriver();
+	    mf = new MaxFunctionPage(driver);
+	    mf.background(); 
+	    mf.shikshaOnline();
+	    mf.maxFunction();
+	}
+
+	@When("user clicks the rating option")
+	public void user_clicks_the_rating_option() throws InterruptedException {
+	    // Write code here that turns the phrase above into concrete actions
+		mf.scroll();
+	    mf.maxFunctionRating();
+	}
+
+	@Then("user is redirected to the feedback page successfully")
+	public void user_is_redirected_to_the_feedback_page_successfully() {
+	    // Write code here that turns the phrase above into concrete actions
+	}
+	
+//=======================Scenario3==========================================================================================================	
+	
+	@Given("user is in the Max\\()Function feedback form")
+	public void user_is_in_the_max_function_feedback_form() throws InterruptedException, AWTException {
+	    // Write code here that turns the phrase above into concrete actions
+	    driver = DriverSetup.chromedriver();
+        mf = new MaxFunctionPage(driver);
+        mf.background();
+        mf.shikshaOnline();
+	    mf.maxFunction();
+	    mf.scroll();
+	    mf.maxFunctionRating();   
+	}
+	@When("user selects one of the available options")
+	public void user_selects_one_of_the_available_options() throws InterruptedException {
+	    // Write code here that turns the phrase above into concrete actions
+	    mf.buttonRating();
+	}
+//	@When("user enters {string}")
+//	public void user_enters(String suggestions) throws InterruptedException {
+//	    // Write code here that turns the phrase above into concrete actions
+//		mf.textarea(suggestions);
+//	}
+	@And("user enters Suggestions")
+	public void user_enters_suggestions(DataTable dt) throws InterruptedException {
+		List<List<String>> cells=dt.cells();
+		
+		mf.textarea(cells.get(0).get(0));
+	}
+	@Then("user clicks the submit button")
+	public void user_clicks_the_submit_button() throws InterruptedException {
+	    // Write code here that turns the phrase above into concrete actions
+		mf.clkbtn();
+	}
+	
+//====================Scenario4=============================================================================================================
+	
+	@Given("user is in the Max\\()Function in Python page")
+	public void user_is_in_the_max_function_in_python_page() throws InterruptedException, AWTException {
+	    // Write code here that turns the phrase above into concrete actions
+	 driver = DriverSetup.chromedriver();
+     mf = new MaxFunctionPage(driver);
+     mf.background();
+     mf.shikshaOnline();
+	 mf.maxFunction();
+	 mf.scroll1();
+	  
+	}
+	@When("user enters the comments")
+	public void user_enters_the_comments(DataTable dt) throws InterruptedException {
+	    // Write code here that turns the phrase above into concrete actions
+       List<List<String>> cells=dt.cells();
+	   mf.txt(cells.get(0).get(0));
+	}
+	@Then("user clicks the Post button and is able to post the comment")
+	public void user_clicks_the_post_button_and_is_able_to_post_the_comment() {
+	    // Write code here that turns the phrase above into concrete actions
+	    mf.postbtn();
+	}
+	
+//	@AfterStep
+//
+//	public static void takeScreendown(Scenario scenerio) {
+//
+//		TakesScreenshot ts= (TakesScreenshot) driver;
+//
+//		   final byte[] src = ts.getScreenshotAs(OutputType.BYTES);
+//
+//	   scenerio.attach(src, "image/png",scenerio.getName());
+//
+//	
+//}
+}

@@ -1,0 +1,69 @@
+@Feature
+Feature: To test the functionality of max()Function in Python
+
+Background: User is logged in to the Shiksha home page
+
+@MaxFunction
+
+Scenario: To test whether max()Function is clickable
+Given user is in Shiksha home page
+When user selects the shiksha online drop down
+And user selects on max()Function in Python
+Then user enters the max()Function page successfully
+
+@Rating
+ 
+Scenario: To test whether rating is clickable
+Given user is in max()Function page
+When user clicks the rating option 
+Then user is redirected to the feedback page successfully
+
+
+@FeedbackForm
+
+Scenario Outline: To test the feedback form 
+Given user is in the Max()Function feedback form
+When user selects one of the available options
+And user enters Suggestions
+|Content is informative|
+Then user clicks the submit button 
+
+@PostComments
+
+Scenario Outline: To test the comments functionality
+Given user is in the Max()Function in Python page
+When user enters the comments
+|The articles are insightful|
+Then user clicks the Post button and is able to post the comment
+
+@AskQuery
+
+Scenario: To test the functionlity of Ask a query on option
+#Given user is on the Shiksha Home page,
+When user clicks on Ask a query on option
+And user is not redirected to the query page successfully
+
+
+
+#@FeedbackForm
+#
+#Scenario Outline: To test the feedback form 
+#Given user is in the Max()Function feedback form
+#When user selects one of the available options
+#And user enters <suggestions>
+#Then user clicks the submit button 
+#
+#Examples:
+#|suggestions|
+#|Content is informative|
+
+#@PostComments
+#Scenario Outline: To test the comments functionality
+#Given user is in the Max()Function in Python page
+#When user enters the "<comments>"
+#Then user clicks the Post button and is able to post the comment
+#
+#Examples:
+#|Comments|
+#|The articles are insightful|
+

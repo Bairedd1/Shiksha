@@ -1,0 +1,177 @@
+package shikshaPage;
+ 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+//import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+ 
+public class MaxFunctionPage {
+	WebDriver driver;
+	@FindBy(xpath="//a[text()=\"Login\"]") WebElement login;
+	@FindBy(xpath="//input[@placeholder=\"Email address\"]") WebElement email;
+    @FindBy(xpath="//input[@class=\"input password\"]") WebElement password;
+    @FindBy(xpath="//button[text()=\"Login\"]") WebElement submit;
+    
+    @FindBy(xpath="//li[@class=\"g_lev1\"]//a[text()=\"Shiksha Online\"]")WebElement elementToHover;
+    @FindBy(xpath="//a[@href=\"https://www.shiksha.com/online-courses/articles/max-function-in-python/\"]")WebElement max;
+    @FindBy(xpath="(//a[text()=\"Download as PDF\"])[1]")WebElement pdfbtn;
+//  @FindBy(xpath="//strong[text()=\"Syntax of max()\"]")WebElement syntax;
+    
+//  @FindBy(xpath="(//span[@class=\"rating-icon-wrpr\"])[5]") WebElement rating ;
+    @FindBy(xpath="(//span[@class=\"rating-icon-wrpr\"])[1]") WebElement rating ;
+//  @FindBy(xpath="//label[text()=\"Easy to read\"]")WebElement button;
+    @FindBy(xpath="//label[@for=\"rating-1\"]")WebElement button;
+    @FindBy(xpath="//p[text()=\"Feedback\"]")WebElement Feed;
+    
+    @FindBy(xpath="//textarea[@name=\"ratingText\"]") WebElement txtarea;
+//  @FindBy(xpath="//div[@class=\"suggetion-box\"]/child::textarea[1]")WebElement txtarea;
+    @FindBy(xpath="//button[@class=\"button button--orange\"]")WebElement btn;
+    @FindBy(xpath="//p[text()=\"Feedback Received\"]")WebElement Feedback;
+    
+   // @FindBy(xpath="(//div[@class=\"popular show\"])[1]")WebElement pop;
+    @FindBy(xpath="//*[@id=\"adp_pwav1\"]/div[2]/div/div[2]/div[1]/div[1]/div[1]")WebElement pop;
+    @FindBy(xpath="//span[text()=\"Python Training\"]")WebElement py;
+    @FindBy(xpath="//span[@class=\"button-container mb-16  \"] ")WebElement en;
+    
+//  @FindBy(xpath="//textarea[@class=\"qst-txtar so-comment-box\"]")WebElement text;
+    @FindBy(xpath="//textarea[@class=\"qst-txtar so-comment-box\"]") WebElement comm;
+    @FindBy(xpath="//button[@class=\"button button--orange rippleefect dark so-button\"]")WebElement post;
+//  @FindBy(xpath="//h2[text()=\"Comments\"]")WebElement cmt;
+//  @FindBy(xpath="//h2[@class=\"askQry-titl\"]")WebElement cmt;
+//  @FindBy(xpath="(//div[@class=\"wikkiContents inline\"])[1]")WebElement cmt;
+    
+	public MaxFunctionPage(WebDriver driver) {
+    	this.driver=driver;
+     PageFactory.initElements(driver, this);
+    }
+	public void background() throws InterruptedException, AWTException {
+		login.click();
+		Thread.sleep(2000);
+		email.sendKeys("bhavanareddy.baireddy@gmail.com");
+		Robot robot = new Robot();
+		int xCoordinate = 500;
+        int yCoordinate = 500;
+        robot.mouseMove(xCoordinate, yCoordinate);
+        Thread.sleep(2000);
+		password.sendKeys("Bhavs@26");
+		Thread.sleep(1000);
+		submit.click();		
+		Thread.sleep(4000);
+}
+// 1st Scenario
+	public void shikshaOnline() throws InterruptedException {
+		Actions actions = new Actions(driver);
+        actions.moveToElement(elementToHover).perform();
+       
+	}
+   
+	public void maxFunction() throws InterruptedException {
+		Thread.sleep(2000);
+		max.click();
+	}
+	public void scroll2() {
+
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scroll(0,5200)");
+
+	}
+	public void pdf() throws InterruptedException {
+		Thread.sleep(2000);
+		pdfbtn.click();
+	}
+//	public String f2()
+//    {
+//    	String res = syntax.getText();
+//    	System.out.println(res);
+//    	return res;
+//    }
+// 2nd Scenario 
+	
+	public void scroll() {
+
+			JavascriptExecutor js=(JavascriptExecutor)driver;
+			js.executeScript("window.scroll(0,5250)");
+
+		}
+	
+	public void maxFunctionRating() throws InterruptedException{
+	   Thread.sleep(1000);
+       rating.click();
+       Thread.sleep(1000);
+	}
+	public void buttonRating() throws InterruptedException
+	{
+		Thread.sleep(1000);
+		button.click();
+		Thread.sleep(1000);
+	}
+	public void textarea(String suggestions) throws InterruptedException{
+		   Thread.sleep(2000);
+		   txtarea.sendKeys(suggestions);
+		   Thread.sleep(2000);
+		}
+	public void clkbtn() throws InterruptedException {
+		Thread.sleep(1000);
+		btn.click();
+		Thread.sleep(1000);
+	}
+	
+	public String fd()
+    {
+    	String res = Feedback.getText();
+    	System.out.println(res);
+    	return res;
+    }
+		
+//	public String f1()
+//    {
+//    	String res = Feed.getText();
+//    	System.out.println(res);
+//    	return res;
+//    }
+	
+// 3rd Scenario
+	public void popular() throws InterruptedException {
+		Thread.sleep(1000);
+		pop.click();
+	}
+	public void python() {
+		py.click();
+	}
+	public void enquire() {
+		en.click();
+	}
+	
+	
+// 4th Scenario 
+	
+	public void scroll1() {
+
+		JavascriptExecutor js=(JavascriptExecutor)driver;
+		js.executeScript("window.scroll(0,5800)");
+
+	}
+	
+	public void commenttxt(String comments) throws InterruptedException {
+		Thread.sleep(2000);
+		comm.sendKeys(comments);
+//		text.sendKeys(comments);
+		Thread.sleep(2000);
+	}
+	
+	public void postbtn() throws InterruptedException {
+		Thread.sleep(3000);
+		post.click();
+	}
+
+}
+	
